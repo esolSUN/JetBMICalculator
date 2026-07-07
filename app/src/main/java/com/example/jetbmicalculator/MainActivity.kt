@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
                     ) {
                         Text(
-                        text = "BMI CALCULATOR APP2",
+                        text = "BMI CALCULATOR APP5",
                         fontSize = 26.sp,
                         fontWeight = FontWeight.ExtraBold
                     )
