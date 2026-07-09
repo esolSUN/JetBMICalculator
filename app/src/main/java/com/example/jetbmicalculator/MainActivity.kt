@@ -49,25 +49,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ){
+                    //一番外側の·カラム
                     Column(
                         horizontalAlignment = Alignment.Start,
                         modifier = Modifier.padding(40.dp)
 
-                    ) {
+                    ) {//タイトル
                         Text(
-                        text = "BMI CALCULATOR APP7",
+                        text = "BMI CALCULATOR APP8",
                         fontSize = 26.sp,
                         fontWeight = FontWeight.ExtraBold
                     )
                         Spacer(modifier = Modifier.height(30.dp))
-                        PinkLabeledTextField(
+                        //LabeledTextField関数を利用し、身長入力場所構築、単位は㎝
+                        LabeledTextField(
                             value = viewModel.height,
                             onValueChange = { viewModel.height = it},
                             label = "height(cm)",
                             placeholder = "170",
                             )
                         Spacer(modifier = Modifier.height(30.dp))
-                        PinkLabeledTextField(
+                        //LabeledTextField関数を利用し、体重入力場所構築、単位は㎏
+                        LabeledTextField(
                             value = viewModel.weight,
                             onValueChange = {viewModel.weight = it},
                             label = "weight(kg)",
@@ -75,10 +78,11 @@ class MainActivity : ComponentActivity() {
                             )
                         Spacer(modifier = Modifier.height(30.dp))
 
-                        //calculate
+                        //calculateボタン
                         Button(
 
                             onClick = {
+                                //viewModelのcalculateBMI関数を呼び出し
                                 viewModel.calculateBMI()
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -95,7 +99,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         Spacer(modifier = Modifier.height(20.dp))
-
+                        //viewModelクラスbmiを使って、計算結果を表示
                         Text(
                             text = "Your BMI is ${viewModel.bmi}",
                             modifier = Modifier.fillMaxWidth(),
@@ -124,7 +128,7 @@ class MainActivity : ComponentActivity() {
     }
 
 @Composable
-fun PinkLabeledTextField(
+fun LabeledTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
