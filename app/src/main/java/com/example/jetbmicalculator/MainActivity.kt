@@ -108,28 +108,17 @@ class MainActivity : ComponentActivity() {
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
                         )
-
-
-
-
-
-
                     }
-
-
                 }
-
-
                 }
             }
-
-
         }
     }
 
 @Composable
 fun LabeledTextField(
     value: String,
+    //ユーザーから何が入力された時に実行する動作
     onValueChange: (String) -> Unit,
     label: String,
     placeholder: String,
@@ -140,20 +129,22 @@ fun LabeledTextField(
             color = Color(0xFFF85F6A),
             fontWeight = FontWeight.Bold,
         )
-
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = value,
+            //ユーザーから何が入力された時に実行する動作
             onValueChange = onValueChange,
+            //入力ボックスの背景を透明に設定
             colors = TextFieldDefaults.colors(
                 focusedContainerColor  = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
             ),
+            //入力ボックスの入力されていない場合、事前用意したplaceholder内容を表示
             placeholder = { Text(text = placeholder) },
+            //入力ボードを数値ボードに設定
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            //一行で表示、改行ができません
             singleLine = true,
-
-
             )
     }
 }
