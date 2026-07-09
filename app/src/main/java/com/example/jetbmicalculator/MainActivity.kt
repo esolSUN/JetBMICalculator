@@ -16,12 +16,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -84,7 +86,8 @@ class MainActivity : ComponentActivity() {
                             placeholder = "60",
                             )
                         Spacer(modifier = Modifier.height(30.dp))
-                        var isShowDetail by remember { mutableStateOf(false) }
+                        var isShowDialog by remember { mutableStateOf(false) }
+
 
                         //calculateボタン
                         Button(
@@ -92,6 +95,11 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 //viewModelのcalculateBMI関数を呼び出し
                                 viewModel.calculateBMI()
+                                if (viewModel.bmi == 0f){
+                                    isShowDialog = true
+                                }else{
+                                    isShowDialog = false
+                                }
 
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -125,6 +133,29 @@ class MainActivity : ComponentActivity() {
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
                         )
+
+                        if (isShowDialog){
+                            AlertDialog(
+                                title = {
+                                    Text(text = "ERROR")
+                                },
+                                text = {
+                                    Text(text = "ERROR１")
+                                },
+                                onDismissRequest = {
+                                        isShowDialog = false
+                                },
+                                confirmButton = {
+                                    TextButton(
+                                        onClick = {
+                                            isShowDialog = false
+                                        }
+                                    ) {
+                                        Text("Confirm")
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
                 }
