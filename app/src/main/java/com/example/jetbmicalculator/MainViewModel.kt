@@ -2,6 +2,7 @@ package com.example.jetbmicalculator
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlin.math.pow
@@ -14,6 +15,10 @@ class MainViewModel: ViewModel() {
     var weight by mutableStateOf("")
     //BMI計算用引数
     var bmi by mutableStateOf(0f)
+
+    //var isShowDetail by remember { mutableStateOf(false) }
+
+
 
     //bmi (weight[kg])/height[m]**2でBMI数値を計算
     fun calculateBMI(){

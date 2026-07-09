@@ -1,5 +1,6 @@
 package com.example.jetbmicalculator
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -24,6 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,6 +54,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ){
+                    //var showDialog by remeber { mutableStateOf(false)}
+
                     //一番外側の·カラム
                     Column(
                         horizontalAlignment = Alignment.Start,
@@ -77,6 +84,7 @@ class MainActivity : ComponentActivity() {
                             placeholder = "60",
                             )
                         Spacer(modifier = Modifier.height(30.dp))
+                        var isShowDetail by remember { mutableStateOf(false) }
 
                         //calculateボタン
                         Button(
@@ -84,6 +92,7 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 //viewModelのcalculateBMI関数を呼び出し
                                 viewModel.calculateBMI()
+
                             },
                             modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.buttonColors(
@@ -98,38 +107,35 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
+
+
                         Spacer(modifier = Modifier.height(20.dp))
+
+
                         //viewModelクラスbmiを使って、計算結果を表示
                         Text(
-                            text = "Your BMI is ${viewModel.bmi}",
+                            text = if (viewModel.bmi != 0f){
+                                "Your BMI is ${viewModel.bmi}"
+                            } else {
+                                 "You input is wrong. Have to be Numbers bigger than 0 "
+                            },
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             color = Color.Gray,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
                         )
-
-
-
-
-
-
                     }
-
-
                 }
-
-
                 }
             }
-
-
         }
     }
 
 @Composable
 fun LabeledTextField(
     value: String,
+    //ユーザーから何が入力された時に実行する動作
     onValueChange: (String) -> Unit,
     label: String,
     placeholder: String,
@@ -140,20 +146,22 @@ fun LabeledTextField(
             color = Color(0xFFF85F6A),
             fontWeight = FontWeight.Bold,
         )
-
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = value,
+            //ユーザーから何が入力された時に実行する動作
             onValueChange = onValueChange,
+            //入力ボックスの背景を透明に設定
             colors = TextFieldDefaults.colors(
                 focusedContainerColor  = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
             ),
+            //入力ボックスの入力されていない場合、事前用意したplaceholder内容を表示
             placeholder = { Text(text = placeholder) },
+            //入力ボードを数値ボードに設定
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            //一行で表示、改行ができません
             singleLine = true,
-
-
             )
     }
 }
