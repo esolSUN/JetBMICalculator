@@ -140,15 +140,26 @@ class MainActivity : ComponentActivity() {
                                     Text(text = "ERROR")
                                 },
                                 text = {
+<<<<<<< HEAD
                                     Text(text = "ERROR１")
                                 },
                                 onDismissRequest = {
                                         isShowDialog = false
+=======
+                                    Text(text = "ERROR")
+                                },
+                                onDismissRequest = {
+                                        isShowDialog = false,
+>>>>>>> origin/master
                                 },
                                 confirmButton = {
                                     TextButton(
                                         onClick = {
+<<<<<<< HEAD
                                             isShowDialog = false
+=======
+                                            isShowDialog = false,
+>>>>>>> origin/master
                                         }
                                     ) {
                                         Text("Confirm")
